@@ -1,0 +1,179 @@
+# Podstawy programowania - 15.10.2023
+
+## Wzorce projektowe
+
+**Wzorzec projektowy** - ma na celu ułatwić pracę poprzez umożliwienie skorzystania z gotowych szablonów rozwiązań w spodziewanych, standardowych sytuacjach.
+
+**Gang czterech**
+1. Erich Gamma,
+2. Richard Helm,
+3. Ralph Johnson,
+4. John Vissides,
+
+**Elementy wzorców projektowych**
+- Odpowiednio dobraną nazwę wzorca,
+- Opis problemu,
+- Rozwiązanie,
+- Konsekwencje,
+
+Wzorce projektowe są **zestawem narzędziowym** składającym się z wypróbowanych wcześniej rozwiązań typowych problemów pojawiających się podczas projektowania **oprogramowania.** Wzorce projektowe definiują **wspólny język,** za pomocą którego możesz sprawniej komunikować się ze współpracownikami.
+
+**Korzyści z korzystania wzorców projektowych**
+    - spójność z koncepcją SOLID - stosując wzorce projektowe zyskujesz pewność, że Twoje rozwiązanie pokrywa najlepsze praktyki programowania zorientowanego obiektowo:
+        - Single Responsibility Principle - zasada pojedyńczej odpowiedzialności - klasa powinna mieć tylko jedną odpowiedzialność
+        - Open/closed principle - zasada otwarte-zamknięte - składniki oprogramowania powinny być otwarta na rozbudowę
+        - Liskov Substitution Principle - zasada podstawiania Liskov - korzystanie z funkcji klasy bazowej musi być możliwe również w przypadku podstawienia instancji klas pochodnych
+        - Interface Segregation Principle - zasada segregacji interfejsów - wiele dedykowanych interfejsów jest lepsze niż jeden ogólny
+        - Dependency Inversion Principle - zasada 
+    - Pozwalają utrzymać Clean Code projektu
+    - Łatwość komunikacji - znacznie prościej jest przekazać koledze nazwę wzorca jaki ma zaimplementować niż starać się to wyjaśnić opisOWO.
+    - **Dla kogoś kto ma młotek wszystko wydaje się gwoździem** - nie zawsze trzeba kropka w kropkę kopiować wzorce
+
+### Klasyfikacja wzorców
+W książce "Design Patterns: Abstraction and Reuse of Object Oriented-Design" opisano trzy klasy wzorców projektowych:
+- Strukturalne,
+- Behawioralne/czynnościowe/operacyjne,
+- Konstrukcyjne/kreacyjne,
+
+    - Architektoniczne (wprowadzone później) opisują bardziej abstrakcyjne wzorce jak np. MVC.
+
+**Strukturalne**
+wyjaśniają jak składać obiekty i klasy w większe struktury, zachowując przy tym elastyczność i efektywność struktur:
+- zarządzanie strukturą obiektów i strukturami złożonymi z obiektów
+- Opisują sposób konstrukcji struktur obiektowych
+
+**Behawioralne**
+zachowanie obiektów i komunikacja między nimi:
+- łańcuch zobowiązań,
+- polecenie,
+- iterator,
+- mediator,
+- pamiątka,
+- obserwator,
+- stan,
+- strategia,
+- metoda szablonowa,
+- odwiedzający,
+
+**Konstrukcyjne**
+tworzenie obiektów, w tym: delegowanie procesu tworzenia do innych klas (ważne ze względu na zmniejszenie współzależności w kodzie), kontrola nad sposobem tworzenia obiektów
+- metoda wytwórcza,
+- budowniczy,
+- singleton,
+- fabryka abstrakcyjna,
+- prototyp,
+
+**Kreacyjne**
+celem jest dostarczenie interfejsu do tworzenia obiektów nieokreślonych jako powiązanych typów
+metoda udostępnia interfejs do tworzenia obiektów.
+
+**Metody wytwórcze**
+- łatwe do rozszerzenia
+- łatwe do testowania
+- (czasem) zbyt dużo bytów
+
+**Fabryka abstrakcyjna** - udostępnia interfejs do tworzenia rodzin powiązanych ze sobą lub zależnych od siebie **obiektów** bez określenia ich **klas konkretnych.**
+- Warunki stosowania:
+        - kiedy system powinien być niezależny od sposobu tworzenia, składania i reprezentowania jego produktów
+        - jeśli system należy skonfigurować za pomocą jednej z wielu rodzin produktów
+        - jeżeli powiązane obiekty - produkty z jednej rodziny są zaprojektowane do wspólnego użytku i trzeba wymusić jednoczesne korzystanie z tych obiektów
+        - kiedy programista chce udostępnić klasę biblioteczną produktów i ujawnić jedynie ich interfejsy, a nie implementację
+- W czasie wykonywania programu powstaje zwykle jeden egzemplarz klasy FabrykaKonkretna. Fabryka ta tworzy obiekty-produkty o określonej implementacji. Aby wygenerować różne obiekty-produkty, trzeba użyć odmiennych fabryk konkretnych
+    c) Fabryka FabrykaAbstrakcyjna przekazuje tworzenie obiektów-produktów do swojej podklasy KonkretnaFabryka
+    d) zalety:
+        - izoluje klasy konkretne: pomaga kontrolować klasy obiektów tworzonych przez aplikację. fabryka kapsułkuje zadanie i proces tworzenia obiektów-produktów, izoluje klienta od klas zawierających implementację. Klienci manipulują egzemplarzami tych klas za pośrednictwem interfejsów abstrakcyjnych, nazwy klas produkjtów są odizolowane w implementacji fanryki konkretnej i nie pojawiają sie w kodzie klienckim
+        - klasa fabryki konkretnej pojawia się w kodzie tylko raz w miejsu tworzenia
+
+#### Wzorzec budowniczy:
+    Budowniczy tworzenie złożonych obiektów etapami. Pozwala produkować rózne typy oraz reprezentacje biektu użtwając tego samego kodu konstruktyjnego.
+    Ten wzorzec projektowy dzieli konstrukcję obiektu na pewne etapy (budujŚciany, wstawDrzwi itp.). Aby powołać do życia obiekt, wykonuje się ciąg takich etapów za pośrednictwem obiektu-budowniczego. Istotne jest to że nie musisz wywoływać wszystkich etapów.
+    c) Zalety:
+        - możesz konstruować obiekty etapami, odkładać niektóre etapy, lub wykonywać je rekursywnie
+        - możesz  wykorzystać ponownie ten sam kod konstrukcyjny budując kolejne reprezentacje produktów 
+        - zasada pojedtyńczekj odpowiedzialności. Można odizolowaćskomplikowany kod konstrukcyjny od loguiki biznesowej produktu.
+    d) wady:
+        - kod staje się bardziej skomplikowany
+
+#### Prototyp:
+    a) określa na podstawie prototypowego egzemplarza rodzajje tworzonych obiektów. Generuje Generuje nowe obiekty przez kopiowanie prototypu.
+    b) używamy go jeżeli system powinien być niezależny od sposobu tworzenia, składania i reprezentwoania produktów oraz:
+        - klasy tworzonych egzemplarzy są okreslane w czasie wykonywania programu (dynamiczne wczytywanie)
+        - programista chce uniknąć tworzenia hierarhii klas fabryk odpowiadającej hierarhii klas produktów
+        - egzemplarze klasy mogą przyjmować jeden z wielu stanów
+    c) zalety:
+        - możliwosć dodawania i usuwania egzemplarzy w czasie wytkonywania programu
+        - określania nowych obietków przez modyfikanie wartości / struktury
+        - zmiejszenie liczby podklas
+        - możliwość dynamicznego konfigurowania apliukacji za pomocą klas
+    d) wady:
+        - w każdej podklasie PROTOTYPE trzeba zaimplementować operacjęClone. ta operacja nie jest łatwa do przeprowadzemnia gdy dane klasy już istnieją lub jeżeli w klasach używane są obiekty nieobsługujące kopiowania lub mające referencje cykliczne
+
+
+
+
+
+
+### Behawioralne:
+    dotyczą algorytmów i podziału zadań pomiędzy obiektami
+
+#### Łańcuch odpowiedzialności - Łańcuch zobowiązań:
+    a) pozwala przekazywać żądania, unikając łączenia ich nadawców i odbiorców. 
+
+#### Strategia:
+    a) wymienne stosowanie obiektów w trakcie trwania aplikacji 
+
+#### Polecenie:
+    a) zmienia żądanie w samodzielny obiekt nie tracąc przy tym informacji
+
+#### Iterator:
+    a) pozwala sekwencyjnie przechodzić od elementu do elementu danego zbioru bez konieczności eksponowania jego formy 
+
+#### Mediator:
+    a) pozwala zredukować chaos pomiędzy żądaniami (policjant na skrzyżowaniu)
+
+#### Pamiątka:
+    a) pozwala zapisywać i przywracać wcześniejszy stan obiektu bez ujawniania szczegółów jego implementacji
+
+#### Obserwator:
+    a) pozwala zdefiniować mechanizm subskrypcji w celu powiadamiania wielu obiektów o zdarzeniach dziejących się w obserwowanym obiekcie - nie magic trick, po prostu zamiast 10 observerów masz obiekt który Ci powie co nowego :)
+
+#### Stam:
+    a) pozwala zmienić zachowanie obiektu zależni od jego stanu wewnętrznego
+
+#### Metoda szablonowa:
+    a) definiuje szkielet algorytmu w klasie bazowej, ale pozwala podklasom nadpisać pewne etapy tego algorytmu bez konieczności zmiany jego strkuktury.
+
+#### Wzorzec odwiedzający:
+    a) pozwala oddzielić algorytmy od obiektów na których pracują
+
+#### Interpreter:
+    a) określa reprezentację gramatyki języka oraz interpreter który wykorzystuje tę reprezentację do interpretowania zadań z danego jeżyka
+
+
+
+
+
+### Strukturalne:
+    wyjaśnia jak składać obiekty
+
+#### Adapter:
+    a) opakowanie - konwertuje dane pomiędzy formatami (XML -> json)
+    b) Wady (klasowy): dostosowuje klasę adapter do klasy Target przez dopasowanie się i nie zadziała jeśli chcemy skorzystać z jego wszystkich podklas
+    c) Wady (obiektowy): dostosowuje obiekt, w efekcie 
+
+#### Fasada:
+    a) dostarcza zjednoczony i uproszczony interfejs, opisuje interfejs wyższego rzędu, który sprawia że podsystem jest łatwiejszy w użyciu
+
+**Dekorator**
+    a) nakładka - pozwala dodawać nowe obowiązki obiektowi nie zmieniając jego faktycznej struktury
+    b) zapewnia większą elastyczność niż dziedziczenie i pozwala unikać tworzenia przeładowanych funkcji na wysokich poziomach hierarhii
+    c) dekorator i komponent nie są identyczne i powstaje wiele obiektów
+
+**Kompozyt** - pozwala komponować obiekty a następnie traktować te struktury jako osobne obiekty - to klasa która jako właściwości ma inne obiekty
+
+**Most** - pozwala na rozdzielenie dużej klasy na dwie hierarchie - abstrakcję i implementację
+
+**Pełnomocnik** - tworzy obiekt zastępczy w miejsce innego obiektu - np. karta debetowa jest przedstawicielem konta bankowego, więc zbiera pieniądze.
+
+**Pyłek** - oszczędza pamięć poprzez zapisywanie stanów obiektów zamiast trzymania ich w zmiennych.
+
