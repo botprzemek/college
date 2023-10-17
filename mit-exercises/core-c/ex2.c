@@ -27,11 +27,11 @@ int powerRecursion(int number, int to, int result) {
 
 
 int main() {
-    printf("Iteration: %d\n", factorialIteration(4));
-    printf("Recursion: %d\n", factorialRecursion(4, 1));
+    printf("factorial with iteration: %d\n", factorialIteration(4));
+    printf("factorial with recursion: %d\n", factorialRecursion(4, 1));
 
-    printf("Iteration: %d\n", powerIteration(2, 4));
-    printf("Recursion: %d\n", powerRecursion(2, 4, 1));
+    printf("power with iteration: %d\n", powerIteration(2, 4));
+    printf("power with recursion: %d\n", powerRecursion(2, 4, 1));
 
     return 0;
 }

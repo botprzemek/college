@@ -14,28 +14,8 @@ int* reverseArray(int* array, int length) {
     return array;
 }
 
-int* splitNumber(int number) {
-    if (number < 0) return 0;
-
-    int* array = (int*) malloc(sizeof(number));
-    int length = 0;
-
-    while (number != 0) {
-        array[length] = number % 10;
-        number /= 10;
-        length++;
-    }
-
-    array = reverseArray(array, length);
-
-    for (int i = 0; i < length; i++) {
-        printf("%d\n", array[i]);
-    }
-
-    return array;
-}
-
-int* triangualarIteration(int* result, int size) {
+int* triangualarIteration(int size) {
+    int* result = (int*) malloc(((int) size / 3) * sizeof(int));
     if (size < 0) return result;
 
     int length = 0;
@@ -65,15 +45,15 @@ int* triangualarRecursion(int* result, int size, int length) {
 }
 
 int main() {
-    int size = 3034;
+    int size = 35034;
 
     clock_t begin1 = clock();
-    int* triangualar1 = triangualarIteration((int*) malloc(size), size);
+    int* triangualar1 = triangualarIteration(size);
     free(triangualar1);
     clock_t end1 = clock();
 
     clock_t begin2 = clock();
-    int* triangualar2 = triangualarRecursion((int*) malloc(size), size, 0);
+    int* triangualar2 = triangualarRecursion((int*) malloc(((int) size / 3) * sizeof(int)), size, 0);
     free(triangualar2);
     clock_t end2 = clock();
 
