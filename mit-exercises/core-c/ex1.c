@@ -45,7 +45,7 @@ int* triangualarRecursion(int* result, int size, int length) {
 }
 
 int main() {
-    int size = 35034;
+    int size = 334;
 
     clock_t begin1 = clock();
     int* triangualar1 = triangualarIteration(size);

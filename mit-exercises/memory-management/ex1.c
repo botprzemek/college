@@ -7,9 +7,9 @@ void square(int* number) {
 int main() {
     int number = 4;
 
-    printf("Normal value: %d\n", number);
+    printf("Operation: %d^2 = ", number);
     square(&number);
-    printf("Squared value: %d", number);
+    printf("%d", number);
 
     return 0;
 }
