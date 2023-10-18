@@ -5,9 +5,13 @@ void square(int* number) {
 }
 
 int main() {
-    int number = 4;
+    int number = 0;
 
-    printf("Operation: %d^2 = ", number);
+    printf("Enter number to be squared: ");
+    scanf("%d", &number);
+
+    printf("\nOperation: %d^2 = ", number);
+
     square(&number);
     printf("%d", number);
 

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int* reverseArray(int* array, int length) {
+int* reverseArray(int **array, int length) {
     int temp;
 
     for (int i = 0; i < length/2; i++) {
@@ -30,7 +30,7 @@ int* triangualarIteration(int size) {
     return result;
 }
 
-int* triangualarRecursion(int* result, int size, int length) {
+int* triangualarRecursion(int **result, int size, int length) {
     if (size < 0) return result;
     if (size % 3 != 0) return triangualarRecursion(result, --size, length);
     if (size != 0) {
@@ -45,7 +45,10 @@ int* triangualarRecursion(int* result, int size, int length) {
 }
 
 int main() {
-    int size = 334;
+    int size = 0;
+
+    printf("Enter numbers size: ");
+    scanf("%d", &size);
 
     clock_t begin1 = clock();
     int* triangualar1 = triangualarIteration(size);
@@ -57,7 +60,7 @@ int main() {
     free(triangualar2);
     clock_t end2 = clock();
 
-    printf("Iteration (%fms)\n", (double)(end1 - begin1));
+    printf("\nIteration (%fms)\n", (double)(end1 - begin1));
     printf("Recursion (%fms)\n", (double)(end2 - begin2));
 
     return 0;
