@@ -10,11 +10,7 @@ void fill(int **array, int *size) {
         if (*(*array + i) <= 0) *(*array + i) = rand() % 323;
     }
 
-    printf("Filled: ");
-
-    for (int i = 0; i < *size; i++) {
-        printf("%d, ", *(*array + i));
-    }
+    for (int i = 0; i < *size; i++) printf("%d, ", *(*array + i));
 }
 
 int main() {
@@ -30,6 +26,7 @@ int main() {
     printf("\nEnter new array size: ");
     scanf("%d", &number2);
 
+    printf("Filled: ");
     fill(&array, &number2);
 
     free(array);
