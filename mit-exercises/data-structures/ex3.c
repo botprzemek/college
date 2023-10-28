@@ -23,9 +23,9 @@ int main() {
     struct Y y;
     struct Z z;
 
-    printf("Size of X: %llu,\n", sizeof(x));
-    printf("Size of Y: %llu,\n", sizeof(y));
-    printf("Size of Z: %llu,\n", sizeof(z));
+    printf("Padding inside X: %lu bytes,\n", sizeof(x) - (sizeof(x.s) - sizeof(x.i) - sizeof(x.c)));
+    printf("Padding inside Y: %lu bytes,\n", sizeof(y) - (sizeof(y.i) - sizeof(y.c) - sizeof(y.s)));
+    printf("Padding inside Z: %lu bytes,\n", sizeof(z) - (sizeof(z.i) - sizeof(z.s) - sizeof(z.c)));
 
     return 0;
 }
