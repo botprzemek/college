@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 void toMiles(const int* kilometers, double* result) {
-    *result = 0.65 * (double) *kilometers;
+    const double MILE = 0.65;
+    *result = MILE * (double) *kilometers;
 }
 
 int main() {
