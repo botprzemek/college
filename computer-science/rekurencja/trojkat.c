@@ -18,7 +18,6 @@ void sierpinski(int n, int x, int y, int dlugosc) {
         return;
     }
 
-    // Kod do rysowania trójkąta, zgodnie ze wzorem
     sierpinski(n - 1, x, y, dlugosc / 2);
     sierpinski(n - 1, x + dlugosc / 2, y, dlugosc / 2);
     sierpinski(n - 1, x + dlugosc / 4, y + dlugosc / 2, dlugosc / 2);

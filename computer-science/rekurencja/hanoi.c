@@ -6,7 +6,7 @@ int main() {
     // Liczba dysków
     int dyski = 3;
 
-    hanoi(dyski, 'A', 'C', 'B');
+    hanoi(dyski, 'A', 'B', 'C');
 
     return 0;
 }

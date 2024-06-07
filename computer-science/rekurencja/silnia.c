@@ -11,10 +11,10 @@ int main() {
     int liczba = 5;
 
     // Wywołujemy rekurencyjną funkcję, aby otrzymać wynik z silni
-    printf("Silnia z %d = %d!\n", liczba, silnia(liczba));
+    printf("Silnia %d! = %d\n", liczba, silnia(liczba));
 
     // Wywołujemy iteracyjną funkcję, aby otrzymać wynik z silni
-    printf("Silnia z %d = %d!\n", liczba, iteracyjnie(liczba));
+    printf("Silnia %d! = %d\n", liczba, iteracyjnie(liczba));
 
     return 0;
 }
@@ -36,6 +36,7 @@ int iteracyjnie(int liczba) {
     // Mnożymy iterację przez silnię, dopóki nie dojdziemy do liczby
     for (int i = 1; i <= liczba; i++) {
         wynik = wynik * i;
+        printf("Wynik = %d\n", wynik);
     }
 
     return wynik;

@@ -9,7 +9,7 @@ int main() {
 
     // Pętlą wywołujemy dziesięć następnych liczb ciągu Fibonacciego
     for (int i = 0; i < liczba; i++) {
-        printf("%d ", fibonacci(i));
+        printf("Liczba %d ciągu Fibonacciego = %d\n", i, fibonacci(i));
     }
 
     return 0;
