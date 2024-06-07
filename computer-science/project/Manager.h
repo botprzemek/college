@@ -1,12 +1,5 @@
-// Manager - Klasa zarządzająca
-//
-// Plik zawiera wektor klasy Player zawierający instacje stworzonych wcześniej graczy.
-// Zawiera również metody na manipulację i wyświetlanie danych wektora.
-
 #ifndef MANAGER_H
 #define MANAGER_H
-
-#include <iostream>
 
 #include "Player.h"
 

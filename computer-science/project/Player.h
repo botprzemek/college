@@ -1,14 +1,5 @@
-// Player - Klasa obiektu (Gracza Koszykówki)
-//
-// Plik zawiera pola określające dane gracza i metody związane z dostępem
-// do jego danych.
-
 #ifndef PLAYER_H
 #define PLAYER_H
-
-#include <iostream>
-
-using namespace std;
 
 class Player {
 private:
