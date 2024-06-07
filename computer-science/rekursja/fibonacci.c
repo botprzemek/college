@@ -1,8 +1,10 @@
 #include <stdio.h>
 
+// Funkcja "fibonacci" jest przykładem funkcji zagnieżdżonej
 int fibonacci(int n);
 
 int main() {
+    // Liczby ciągu Fibonacciego
     int liczba = 10;
 
     // Pętlą wywołujemy dziesięć następnych liczb ciągu Fibonacciego

@@ -1,10 +1,12 @@
 void sierpinski(int n, int x, int y, int dlugosc);
 
 int main() {
-    int poziom = 4; // Poziom rekurencji
-    int dlugosc = 16; // Długość boku
+    // Poziom rekurencji
+    int poziom = 4;
 
-    // Wywołujemy funkcję
+    // Długość boku
+    int dlugosc = 16;
+
     sierpinski(poziom, 0, 0, dlugosc);
 
     return 0;
