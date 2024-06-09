@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <string.h>
 
 #define N 20
 
@@ -12,89 +11,28 @@ struct ksiazka {
     bool rekordSkasowany;
 };
 
-struct ksiazka bazaDanych[N];
+struct ksiazka biblioteka[N];
 
-void dodajKsiazke() {
-    for (int i = 0; i < N; i++) {
-        if (bazaDanych[i].rekordSkasowany) {
-            printf("Podaj tytul: ");
-            scanf(" %[^\n]", bazaDanych[i].tytul);
-            printf("Podaj autora: ");
-            scanf(" %[^\n]", bazaDanych[i].autor);
-            printf("Podaj liczbe stron: ");
-            scanf("%d", &bazaDanych[i].liczbaStron);
-            bazaDanych[i].wypozyczona = false;
-            bazaDanych[i].rekordSkasowany = false;
-            printf("Ksiazka dodana.\n");
-            return;
-        }
-    }
-    printf("Brak miejsca na nowe ksiazki.\n");
-}
+void dodaj();
 
-void edytujKsiazke(int index) {
-    if (index >= 0 && index < N && !bazaDanych[index].rekordSkasowany) {
-        printf("Podaj nowy tytul: ");
-        scanf(" %[^\n]", bazaDanych[index].tytul);
-        printf("Podaj nowego autora: ");
-        scanf(" %[^\n]", bazaDanych[index].autor);
-        printf("Podaj nowa liczbe stron: ");
-        scanf("%d", &bazaDanych[index].liczbaStron);
-        printf("Ksiazka zaktualizowana.\n");
-    } else {
-        printf("Nieprawidlowy indeks lub ksiazka usunieta.\n");
-    }
-}
+void edytuj(int index);
 
-void usunKsiazke(int index) {
-    if (index >= 0 && index < N && !bazaDanych[index].rekordSkasowany) {
-        bazaDanych[index].rekordSkasowany = true;
-        printf("Ksiazka usunieta.\n");
-    } else {
-        printf("Nieprawidlowy indeks lub ksiazka juz usunieta.\n");
-    }
-}
+void usun(int index);
 
-void wypozyczKsiazke(int index) {
-    if (index >= 0 && index < N && !bazaDanych[index].rekordSkasowany && !bazaDanych[index].wypozyczona) {
-        bazaDanych[index].wypozyczona = true;
-        printf("Ksiazka wypozyczona.\n");
-    } else {
-        printf("Nieprawidlowy indeks, ksiazka usunieta lub juz wypozyczona.\n");
-    }
-}
+void wypozycz(int index);
 
-void zwrocKsiazke(int index) {
-    if (index >= 0 && index < N && !bazaDanych[index].rekordSkasowany && bazaDanych[index].wypozyczona) {
-        bazaDanych[index].wypozyczona = false;
-        printf("Ksiazka zwrocona.\n");
-    } else {
-        printf("Nieprawidlowy indeks, ksiazka usunieta lub nie byla wypozyczona.\n");
-    }
-}
+void zwroc(int index);
 
-void wyswietlWszystkieKsiazki() {
-    for (int i = 0; i < N; i++) {
-        if (!bazaDanych[i].rekordSkasowany) {
-            printf("Indeks: %d, Tytul: %s, Autor: %s, Liczba stron: %d, Wypozyczona: %s\n", i, bazaDanych[i].tytul, bazaDanych[i].autor, bazaDanych[i].liczbaStron, bazaDanych[i].wypozyczona ? "Tak" : "Nie");
-        }
-    }
-}
+void wyswietl_wszystkie();
 
-void wyswietlKsiazkiWypozyczone() {
-    for (int i = 0; i < N; i++) {
-        if (!bazaDanych[i].rekordSkasowany && bazaDanych[i].wypozyczona) {
-            printf("Indeks: %d, Tytul: %s, Autor: %s, Liczba stron: %d\n", i, bazaDanych[i].tytul, bazaDanych[i].autor, bazaDanych[i].liczbaStron);
-        }
-    }
-}
+void wyswietl_wypozyczone();
 
 int main() {
     for (int i = 0; i < N; i++) {
-        bazaDanych[i].rekordSkasowany = true; // oznacza, że miejsce jest wolne
+        biblioteka[i].rekordSkasowany = true;
     }
 
-    int choice, index;
+    int wybor, index;
 
     while (1) {
         printf("\nMenu:\n");
@@ -107,37 +45,39 @@ int main() {
         printf("7. Wyswietl wypozyczone ksiazki\n");
         printf("8. Wyjdz\n");
         printf("Wybor: ");
-        scanf("%d", &choice);
 
-        switch (choice) {
+        wybor = getchar();
+        fflush(stdin);
+
+        switch (wybor) {
             case 1:
-                dodajKsiazke();
+                dodaj();
                 break;
             case 2:
                 printf("Podaj indeks ksiazki do edycji: ");
                 scanf("%d", &index);
-                edytujKsiazke(index);
+                edytuj(index);
                 break;
             case 3:
                 printf("Podaj indeks ksiazki do usuniecia: ");
                 scanf("%d", &index);
-                usunKsiazke(index);
+                usun(index);
                 break;
             case 4:
                 printf("Podaj indeks ksiazki do wypozyczenia: ");
                 scanf("%d", &index);
-                wypozyczKsiazke(index);
+                wypozycz(index);
                 break;
             case 5:
                 printf("Podaj indeks ksiazki do zwrocenia: ");
                 scanf("%d", &index);
-                zwrocKsiazke(index);
+                zwroc(index);
                 break;
             case 6:
-                wyswietlWszystkieKsiazki();
+                wyswietl_wszystkie();
                 break;
             case 7:
-                wyswietlKsiazkiWypozyczone();
+                wyswietl_wypozyczone();
                 break;
             case 8:
                 return 0;
@@ -146,4 +86,83 @@ int main() {
         }
     }
     return 0;
+}
+
+void dodaj() {
+    for (int i = 0; i < N; i++) {
+        if (!biblioteka[i].rekordSkasowany) return;
+
+        printf("Podaj tytul: ");
+        scanf(" %[^\n]", biblioteka[i].tytul);
+        printf("Podaj autora: ");
+        scanf(" %[^\n]", biblioteka[i].autor);
+        printf("Podaj liczbe stron: ");
+        scanf("%d", &biblioteka[i].liczbaStron);
+
+        biblioteka[i].wypozyczona = false;
+        biblioteka[i].rekordSkasowany = false;
+
+        printf("Ksiazka dodana.\n");
+    }
+
+    printf("Brak miejsca na nowe ksiazki.\n");
+}
+
+void edytuj(int index) {
+    if (index >= 0 && index < N && !biblioteka[index].rekordSkasowany) {
+        printf("Podaj nowy tytul: ");
+        scanf(" %[^\n]", biblioteka[index].tytul);
+        printf("Podaj nowego autora: ");
+        scanf(" %[^\n]", biblioteka[index].autor);
+        printf("Podaj nowa liczbe stron: ");
+        scanf("%d", &biblioteka[index].liczbaStron);
+        printf("Ksiazka zaktualizowana.\n");
+    } else {
+        printf("Nieprawidlowy indeks lub ksiazka usunieta.\n");
+    }
+}
+
+void usun(int index) {
+    if (index >= 0 && index < N && !biblioteka[index].rekordSkasowany) {
+        biblioteka[index].rekordSkasowany = true;
+        printf("Ksiazka usunieta.\n");
+    } else {
+        printf("Nieprawidlowy indeks lub ksiazka juz usunieta.\n");
+    }
+}
+
+void wypozycz(int index) {
+    if (index >= 0 && index < N && !biblioteka[index].rekordSkasowany && !biblioteka[index].wypozyczona) {
+        biblioteka[index].wypozyczona = true;
+        printf("Ksiazka wypozyczona.\n");
+    } else {
+        printf("Nieprawidlowy indeks, ksiazka usunieta lub juz wypozyczona.\n");
+    }
+}
+
+void zwroc(int index) {
+    if (index >= 0 && index < N && !biblioteka[index].rekordSkasowany && biblioteka[index].wypozyczona) {
+        biblioteka[index].wypozyczona = false;
+        printf("Ksiazka zwrocona.\n");
+    } else {
+        printf("Nieprawidlowy indeks, ksiazka usunieta lub nie byla wypozyczona.\n");
+    }
+}
+
+void wyswietl_wszystkie() {
+    for (int i = 0; i < N; i++) {
+        if (!biblioteka[i].rekordSkasowany) {
+            printf("Indeks: %d, Tytul: %s, Autor: %s, Liczba stron: %d, Wypozyczona: %s\n", i, biblioteka[i].tytul,
+                   biblioteka[i].autor, biblioteka[i].liczbaStron, biblioteka[i].wypozyczona ? "Tak" : "Nie");
+        }
+    }
+}
+
+void wyswietl_wypozyczone() {
+    for (int i = 0; i < N; i++) {
+        if (!biblioteka[i].rekordSkasowany && biblioteka[i].wypozyczona) {
+            printf("Indeks: %d, Tytul: %s, Autor: %s, Liczba stron: %d\n", i, biblioteka[i].tytul, biblioteka[i].autor,
+                   biblioteka[i].liczbaStron);
+        }
+    }
 }

@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,68 +7,80 @@ struct element {
     struct element* nastepny;
 };
 
-struct element* top = NULL;
+struct element* pierwszy = NULL;
 
-void push(int liczba) {
-    struct element* nowyElement = (struct element*)malloc(sizeof(struct element));
+void dodaj(int liczba) {
+    struct element* nowyElement = (struct element*) malloc(sizeof(struct element));
+
     nowyElement->liczba = liczba;
-    nowyElement->nastepny = top;
-    top = nowyElement;
+    nowyElement->nastepny = pierwszy;
+
+    pierwszy = nowyElement;
 }
 
-int pop() {
-    if (top == NULL) {
+int pobierz() {
+    if (pierwszy == NULL) {
         printf("Stos jest pusty.\n");
         return -1;
     }
-    int liczba = top->liczba;
-    struct element* temp = top;
-    top = top->nastepny;
+
+    int liczba = pierwszy->liczba;
+    struct element* temp = pierwszy;
+
+    pierwszy = pierwszy->nastepny;
+
     free(temp);
     return liczba;
 }
 
 void wyswietlStos() {
-    struct element* temp = top;
+    struct element* temp = pierwszy;
+
     while (temp != NULL) {
         printf("%d ", temp->liczba);
         temp = temp->nastepny;
     }
+
     printf("\n");
 }
 
 int main() {
-    int choice, liczba;
+    int wybor, liczba;
 
     while (1) {
-        printf("\nMenu:\n");
+        printf("Menu:\n");
         printf("1. Dodaj na stos\n");
         printf("2. Pobierz ze stosu\n");
         printf("3. Wyswietl stos\n");
         printf("4. Wyjdz\n");
         printf("Wybor: ");
-        scanf("%d", &choice);
 
-        switch (choice) {
-            case 1:
+        wybor = getchar();
+        fflush(stdin);
+
+        switch (wybor) {
+            case '1':
                 printf("Podaj liczbe: ");
+
                 scanf("%d", &liczba);
-                push(liczba);
+                dodaj(liczba);
+
                 break;
-            case 2:
-                liczba = pop();
+            case '2':
+                liczba = pobierz();
+
                 if (liczba != -1) {
                     printf("Pobrano liczbe: %d\n", liczba);
                 }
+
                 break;
-            case 3:
+            case '3':
                 wyswietlStos();
                 break;
-            case 4:
+            case '4':
                 return 0;
             default:
-                printf("Nieprawidlowy wybor.\n");
+                printf("Nieprawidlowy wybor\n");
         }
     }
-    return 0;
 }

@@ -1,13 +1,14 @@
 #include <iostream>
 #include <cmath>
 
-// Klasa Kolo
+using namespace std;
+
 class Kolo {
 private:
     double promien;
 
 public:
-    Kolo(double promien) : promien(promien) {}
+    explicit Kolo(double promien) : promien(promien) {}
 
     double pole() const {
         return M_PI * promien * promien;
@@ -18,26 +19,8 @@ public:
     }
 };
 
-// Klasa Kwadrat
-class Kwadrat {
-private:
-    double bok;
-
-public:
-    Kwadrat(double bok) : bok(bok) {}
-
-    double pole() const {
-        return bok * bok;
-    }
-
-    double obwod() const {
-        return 4 * bok;
-    }
-};
-
-// Klasa Prostokat
 class Prostokat {
-private:
+protected:
     double dlugosc;
     double szerokosc;
 
@@ -53,19 +36,35 @@ public:
     }
 };
 
+class Kwadrat : public Prostokat {
+public:
+    explicit Kwadrat(double bok): Prostokat(bok, bok) {}
+};
+
 int main() {
-    Kolo k(5.0);
-    Kwadrat kw(4.0);
-    Prostokat p(6.0, 3.0);
+    cout << "Figury" << endl << endl;
 
-    std::cout << "Pole kola: " << k.pole() << std::endl;
-    std::cout << "Obwod kola: " << k.obwod() << std::endl;
 
-    std::cout << "Pole kwadratu: " << kw.pole() << std::endl;
-    std::cout << "Obwod kwadratu: " << kw.obwod() << std::endl;
+    cout << "Kolo: " << endl << endl;
 
-    std::cout << "Pole prostokata: " << p.pole() << std::endl;
-    std::cout << "Obwod prostokata: " << p.obwod() << std::endl;
+    Kolo kolo(5.0);
+
+    cout << "Pole: " << kolo.pole() << endl;
+    cout << "Obwod: " << kolo.obwod() << endl << endl;
+
+    cout << "Prostokat: " << endl << endl;
+
+    Prostokat prostokat(6.0, 3.0);
+
+    cout << "Pole: " << prostokat.pole() << endl;
+    cout << "Obwod: " << prostokat.obwod() << endl << endl;
+
+    cout << "Kwadrat: " << endl << endl;
+
+    Kwadrat kwadrat(4.0);
+
+    cout << "Pole: " << kwadrat.pole() << endl;
+    cout << "Obwod: " << kwadrat.obwod() << endl << endl;
 
     return 0;
 }
