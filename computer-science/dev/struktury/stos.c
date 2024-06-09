@@ -33,7 +33,7 @@ int pobierz() {
     return liczba;
 }
 
-void wyswietlStos() {
+void wyswietl() {
     struct element* temp = pierwszy;
 
     while (temp != NULL) {
@@ -75,7 +75,7 @@ int main() {
 
                 break;
             case '3':
-                wyswietlStos();
+                wyswietl();
                 break;
             case '4':
                 return 0;
