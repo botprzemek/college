@@ -8,7 +8,7 @@ int main() {
     return 0;
 }
 
-int zagniezdzona(int number) {
+int nested(int number) {
     if (number <= 1) {
         return number;
     }
